@@ -1,0 +1,19 @@
+﻿<Window x:Class="OOTVETINAVOPROSII.NewTematil"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OOTVETINAVOPROSII"
+        mc:Ignorable="d"
+        Title="NewTematil" Height="450" Width="650">
+    <Grid Background="#FFD6D6AB">
+        <TextBlock x:Name="maintxt" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Имеющиеся тематики" VerticalAlignment="Top" FontSize="24" Foreground="#FFDEA0F3" Height="40" Width="276" TextAlignment="Center"/>
+        <TextBox x:Name="alltematik" HorizontalAlignment="Left" Margin="10,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" Height="381" Background="#FFFBF1D2" FontSize="20" VerticalScrollBarVisibility="Visible"/>
+        <TextBlock x:Name="maintxt_Копировать" HorizontalAlignment="Left" Margin="352,10,0,0" TextWrapping="Wrap" Text="Добавить новую" VerticalAlignment="Top" FontSize="24" Foreground="#FFDEA0F3" Height="40" Width="276" TextAlignment="Center"/>
+        <TextBox x:Name="newtematik" HorizontalAlignment="Left" Margin="342,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="296" FontSize="22" Background="#FFFBF1D2"/>
+        <Button x:Name="createnewtematik" Content="Добавить" HorizontalAlignment="Left" Margin="342,206,0,0" VerticalAlignment="Top" Background="#FFFBF1D2" Foreground="#FFDEA0F3" FontSize="24" Width="296" Click="createnewtematik_Click"/>
+        <TextBlock x:Name="maintxt_Копировать1" HorizontalAlignment="Left" Margin="352,96,0,0" TextWrapping="Wrap" Text="Название" VerticalAlignment="Top" FontSize="20" Foreground="#FFDEA0F3" Height="27" Width="276" TextAlignment="Center"/>
+        <Button x:Name="toadmpae" Content="Вернуться" HorizontalAlignment="Left" Margin="342,378,0,0" VerticalAlignment="Top" Background="#FFFBF1D2" Foreground="#FFDEA0F3" FontSize="24" Width="296" Click="toadmpae_Click"/>
+
+    </Grid>
+</Window>

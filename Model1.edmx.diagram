@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7f59c32ba24e44cca7da47ab964976ac" Name="Diagram1">
+        <EntityTypeShape EntityType="OtvetiNaVoprosiModel.Должности" Width="1.5" PointX="1.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtvetiNaVoprosiModel.Загадки_и_ответы" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtvetiNaVoprosiModel.Пользователи" Width="1.5" PointX="3.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtvetiNaVoprosiModel.Результаты" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtvetiNaVoprosiModel.Тематика_загадок" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <AssociationConnector Association="OtvetiNaVoprosiModel.FK_Пользователи_Должности" ManuallyRouted="false" />
+        <AssociationConnector Association="OtvetiNaVoprosiModel.FK_Загадки_и_ответы_Тематика_загадок" ManuallyRouted="false" />
+        <AssociationConnector Association="OtvetiNaVoprosiModel.FK_Результаты_Пользователи" ManuallyRouted="false" />
+        <AssociationConnector Association="OtvetiNaVoprosiModel.FK_Результаты_Тематика_загадок" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

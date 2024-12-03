@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище OtvetiNaVoprosiModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Должности">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="nchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="Загадки и ответы">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код тематики" Type="int" />
+          <Property Name="Загадка" Type="nchar" MaxLength="100" />
+          <Property Name="Ответ 1" Type="nchar" MaxLength="100" />
+          <Property Name="Ответ 2" Type="nchar" MaxLength="100" />
+          <Property Name="Ответ 3" Type="nchar" MaxLength="100" />
+          <Property Name="Правильный ответ" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Пользователи">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Логин" Type="nchar" MaxLength="70" />
+          <Property Name="Пароль" Type="nchar" MaxLength="70" />
+          <Property Name="Фамилия" Type="nchar" MaxLength="80" />
+          <Property Name="Имя" Type="nchar" MaxLength="80" />
+          <Property Name="Отчество" Type="nchar" MaxLength="80" />
+          <Property Name="Код должности" Type="int" />
+          <Property Name="Электронная почта" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Результаты">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код пользователя" Type="int" />
+          <Property Name="Кол-во верных ответов" Type="int" />
+          <Property Name="Код тематики вопросов" Type="int" />
+          <Property Name="Всего вопросов было" Type="int" />
+        </EntityType>
+        <EntityType Name="Тематика загадок">
+          <Key>
+            <PropertyRef Name="Номер" />
+          </Key>
+          <Property Name="Номер" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Загадки и ответы_Тематика загадок">
+          <End Role="Тематика загадок" Type="Self.Тематика загадок" Multiplicity="0..1" />
+          <End Role="Загадки и ответы" Type="Self.Загадки и ответы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тематика загадок">
+              <PropertyRef Name="Номер" />
+            </Principal>
+            <Dependent Role="Загадки и ответы">
+              <PropertyRef Name="Код тематики" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Пользователи_Должности">
+          <End Role="Должности" Type="Self.Должности" Multiplicity="0..1" />
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Должности">
+              <PropertyRef Name="Код" />
+            </Principal>
+            <Dependent Role="Пользователи">
+              <PropertyRef Name="Код должности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Результаты_Пользователи">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
+          <End Role="Результаты" Type="Self.Результаты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="Код" />
+            </Principal>
+            <Dependent Role="Результаты">
+              <PropertyRef Name="Код пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Результаты_Тематика загадок">
+          <End Role="Тематика загадок" Type="Self.Тематика загадок" Multiplicity="0..1" />
+          <End Role="Результаты" Type="Self.Результаты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тематика загадок">
+              <PropertyRef Name="Номер" />
+            </Principal>
+            <Dependent Role="Результаты">
+              <PropertyRef Name="Код тематики вопросов" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище OtvetiNaVoprosiModelContainer">
+          <EntitySet Name="Должности" EntityType="Self.Должности" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Загадки и ответы" EntityType="Self.Загадки и ответы" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Результаты" EntityType="Self.Результаты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Тематика загадок" EntityType="Self.Тематика загадок" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Загадки и ответы_Тематика загадок" Association="Self.FK_Загадки и ответы_Тематика загадок">
+            <End Role="Тематика загадок" EntitySet="Тематика загадок" />
+            <End Role="Загадки и ответы" EntitySet="Загадки и ответы" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Пользователи_Должности" Association="Self.FK_Пользователи_Должности">
+            <End Role="Должности" EntitySet="Должности" />
+            <End Role="Пользователи" EntitySet="Пользователи" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Результаты_Пользователи" Association="Self.FK_Результаты_Пользователи">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Результаты" EntitySet="Результаты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Результаты_Тематика загадок" Association="Self.FK_Результаты_Тематика загадок">
+            <End Role="Тематика загадок" EntitySet="Тематика загадок" />
+            <End Role="Результаты" EntitySet="Результаты" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OtvetiNaVoprosiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Должности">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Пользователи" Relationship="Self.FK_Пользователи_Должности" FromRole="Должности" ToRole="Пользователи" />
+        </EntityType>
+        <EntityType Name="Загадки_и_ответы">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_тематики" Type="Int32" />
+          <Property Name="Загадка" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Ответ_1" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Ответ_2" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Ответ_3" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Правильный_ответ" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Тематика_загадок" Relationship="Self.FK_Загадки_и_ответы_Тематика_загадок" FromRole="Загадки_и_ответы" ToRole="Тематика_загадок" />
+        </EntityType>
+        <EntityType Name="Пользователи">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Логин" Type="String" MaxLength="70" FixedLength="true" Unicode="true" />
+          <Property Name="Пароль" Type="String" MaxLength="70" FixedLength="true" Unicode="true" />
+          <Property Name="Фамилия" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
+          <Property Name="Имя" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
+          <Property Name="Отчество" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
+          <Property Name="Код_должности" Type="Int32" />
+          <Property Name="Электронная_почта" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Должности" Relationship="Self.FK_Пользователи_Должности" FromRole="Пользователи" ToRole="Должности" />
+          <NavigationProperty Name="Результаты" Relationship="Self.FK_Результаты_Пользователи" FromRole="Пользователи" ToRole="Результаты" />
+        </EntityType>
+        <EntityType Name="Результаты">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_пользователя" Type="Int32" />
+          <Property Name="Кол_во_верных_ответов" Type="Int32" />
+          <Property Name="Код_тематики_вопросов" Type="Int32" />
+          <Property Name="Всего_вопросов_было" Type="Int32" />
+          <NavigationProperty Name="Пользователи" Relationship="Self.FK_Результаты_Пользователи" FromRole="Результаты" ToRole="Пользователи" />
+          <NavigationProperty Name="Тематика_загадок" Relationship="Self.FK_Результаты_Тематика_загадок" FromRole="Результаты" ToRole="Тематика_загадок" />
+        </EntityType>
+        <EntityType Name="Тематика_загадок">
+          <Key>
+            <PropertyRef Name="Номер" />
+          </Key>
+          <Property Name="Номер" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Загадки_и_ответы" Relationship="Self.FK_Загадки_и_ответы_Тематика_загадок" FromRole="Тематика_загадок" ToRole="Загадки_и_ответы" />
+          <NavigationProperty Name="Результаты" Relationship="Self.FK_Результаты_Тематика_загадок" FromRole="Тематика_загадок" ToRole="Результаты" />
+        </EntityType>
+        <Association Name="FK_Пользователи_Должности">
+          <End Role="Должности" Type="Self.Должности" Multiplicity="0..1" />
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Должности">
+              <PropertyRef Name="Код" />
+            </Principal>
+            <Dependent Role="Пользователи">
+              <PropertyRef Name="Код_должности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Загадки_и_ответы_Тематика_загадок">
+          <End Role="Тематика_загадок" Type="Self.Тематика_загадок" Multiplicity="0..1" />
+          <End Role="Загадки_и_ответы" Type="Self.Загадки_и_ответы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тематика_загадок">
+              <PropertyRef Name="Номер" />
+            </Principal>
+            <Dependent Role="Загадки_и_ответы">
+              <PropertyRef Name="Код_тематики" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Результаты_Пользователи">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
+          <End Role="Результаты" Type="Self.Результаты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="Код" />
+            </Principal>
+            <Dependent Role="Результаты">
+              <PropertyRef Name="Код_пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Результаты_Тематика_загадок">
+          <End Role="Тематика_загадок" Type="Self.Тематика_загадок" Multiplicity="0..1" />
+          <End Role="Результаты" Type="Self.Результаты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тематика_загадок">
+              <PropertyRef Name="Номер" />
+            </Principal>
+            <Dependent Role="Результаты">
+              <PropertyRef Name="Код_тематики_вопросов" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OtvetiNaVoprosiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Должности" EntityType="Self.Должности" />
+          <EntitySet Name="Загадки_и_ответы" EntityType="Self.Загадки_и_ответы" />
+          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" />
+          <EntitySet Name="Результаты" EntityType="Self.Результаты" />
+          <EntitySet Name="Тематика_загадок" EntityType="Self.Тематика_загадок" />
+          <AssociationSet Name="FK_Пользователи_Должности" Association="Self.FK_Пользователи_Должности">
+            <End Role="Должности" EntitySet="Должности" />
+            <End Role="Пользователи" EntitySet="Пользователи" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Загадки_и_ответы_Тематика_загадок" Association="Self.FK_Загадки_и_ответы_Тематика_загадок">
+            <End Role="Тематика_загадок" EntitySet="Тематика_загадок" />
+            <End Role="Загадки_и_ответы" EntitySet="Загадки_и_ответы" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Результаты_Пользователи" Association="Self.FK_Результаты_Пользователи">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Результаты" EntitySet="Результаты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Результаты_Тематика_загадок" Association="Self.FK_Результаты_Тематика_загадок">
+            <End Role="Тематика_загадок" EntitySet="Тематика_загадок" />
+            <End Role="Результаты" EntitySet="Результаты" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище OtvetiNaVoprosiModelContainer" CdmEntityContainer="OtvetiNaVoprosiEntities">
+          <EntitySetMapping Name="Должности">
+            <EntityTypeMapping TypeName="OtvetiNaVoprosiModel.Должности">
+              <MappingFragment StoreEntitySet="Должности">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Загадки_и_ответы">
+            <EntityTypeMapping TypeName="OtvetiNaVoprosiModel.Загадки_и_ответы">
+              <MappingFragment StoreEntitySet="Загадки и ответы">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Код_тематики" ColumnName="Код тематики" />
+                <ScalarProperty Name="Загадка" ColumnName="Загадка" />
+                <ScalarProperty Name="Ответ_1" ColumnName="Ответ 1" />
+                <ScalarProperty Name="Ответ_2" ColumnName="Ответ 2" />
+                <ScalarProperty Name="Ответ_3" ColumnName="Ответ 3" />
+                <ScalarProperty Name="Правильный_ответ" ColumnName="Правильный ответ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Пользователи">
+            <EntityTypeMapping TypeName="OtvetiNaVoprosiModel.Пользователи">
+              <MappingFragment StoreEntitySet="Пользователи">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Код_должности" ColumnName="Код должности" />
+                <ScalarProperty Name="Электронная_почта" ColumnName="Электронная почта" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Результаты">
+            <EntityTypeMapping TypeName="OtvetiNaVoprosiModel.Результаты">
+              <MappingFragment StoreEntitySet="Результаты">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Код_пользователя" ColumnName="Код пользователя" />
+                <ScalarProperty Name="Кол_во_верных_ответов" ColumnName="Кол-во верных ответов" />
+                <ScalarProperty Name="Код_тематики_вопросов" ColumnName="Код тематики вопросов" />
+                <ScalarProperty Name="Всего_вопросов_было" ColumnName="Всего вопросов было" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Тематика_загадок">
+            <EntityTypeMapping TypeName="OtvetiNaVoprosiModel.Тематика_загадок">
+              <MappingFragment StoreEntitySet="Тематика загадок">
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

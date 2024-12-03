@@ -1,0 +1,19 @@
+﻿<Window x:Class="OOTVETINAVOPROSII.GuestPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OOTVETINAVOPROSII"
+        mc:Ignorable="d"
+        Title="GuestPage" Height="450" Width="434">
+    <Grid Background="#FFD6D6AB">
+        <TextBlock HorizontalAlignment="Center" Margin="0,22,0,0" TextWrapping="Wrap" Text="Страница гостя" VerticalAlignment="Top" FontSize="24" Foreground="#FFDEA0F3" Height="40" Width="182"/>
+
+        <Button x:Name="esitbtn" Content="Выйти" HorizontalAlignment="Center" Margin="0,372,0,0" VerticalAlignment="Top" Background="#FFFBF1D2" Foreground="#FFDEA0F3" FontSize="24" Width="311" Click="esitbtn_Click"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,79,0,0" TextWrapping="Wrap" Text="Тематика:" VerticalAlignment="Top" FontSize="24" Foreground="#FFDEA0F3" Height="40" Width="218" TextAlignment="Center"/>
+        <Button x:Name="checkres" Content="Посмотреть результаты" HorizontalAlignment="Center" Margin="0,307,0,0" VerticalAlignment="Top" Background="#FFFBF1D2" Foreground="#FFDEA0F3" FontSize="24" Width="311" Click="checkres_Click"/>
+        <ComboBox x:Name="tematicvibr" HorizontalAlignment="Center" Margin="0,119,0,0" VerticalAlignment="Top" Width="310" FontSize="22" Background="#FFFBF1D2" BorderBrush="#FFFBF1D2" Foreground="#FFDEA0F3"/>
+        <Button x:Name="totest" Content="Пройти тест" HorizontalAlignment="Center" Margin="0,181,0,0" VerticalAlignment="Top" Background="#FFFBF1D2" Foreground="#FFDEA0F3" FontSize="24" Width="310" Click="totest_Click"/>
+
+    </Grid>
+</Window>
